@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — CGSLB FedEx LGG</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      width: 100%; padding: .7rem 1rem; border-radius: var(--radius);
+      border: 2px solid var(--gray-200); font-size: .95rem;
+      font-family: inherit; transition: var(--transition); outline: none;
+      background: var(--white);
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus {
+      border-color: var(--blue-cgslb);
+      box-shadow: 0 0 0 3px var(--blue-light);
+    }
+    .contact-form textarea { resize: vertical; min-height: 130px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } }
+    .success-msg {
+      display: none; background: #F0FDF4; border: 2px solid var(--green);
+      border-radius: var(--radius); padding: 1.25rem; text-align: center;
+      color: var(--green); font-weight: 600;
+    }
+    .success-msg.show { display: block; }
+  </style>
+</head>
+<body>
+
+  <div id="topbar-slot"></div>
+  <div id="header-slot"></div>
+  <div id="modal-slot"></div>
+
+  <div class="page-hero">
+    <div class="container">
+      <nav class="breadcrumb">
+        <a href="index.html">Accueil</a>
+        <span>›</span>
+        <span>Contact</span>
+      </nav>
+      <h1>📬 Contactez-nous</h1>
+      <p>Votre délégation CGSLB est à votre écoute</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:3rem;align-items:start">
+
+        <!-- INFOS CONTACT -->
+        <div>
+          <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:1.5rem">Vos délégués syndicaux</h2>
+
+          <div class="contact-card" style="margin-bottom:1rem;text-align:left;padding:1.25rem">
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.75rem">
+              <div class="contact-avatar" style="width:52px;height:52px;font-size:1.3rem;flex-shrink:0">👤</div>
+              <div>
+                <div style="font-weight:700">Jean-Marc Dubois</div>
+                <div class="role" style="margin-bottom:0">Délégué principal</div>
+              </div>
+            </div>
+            <div class="contact-info">
+              <div>📞 <a href="tel:+32474123456">0474 12 34 56</a></div>
+              <div>✉️ <a href="mailto:jm.dubois@cgslb-lgg.be">jm.dubois@cgslb-lgg.be</a></div>
+              <div>🕐 Lun–Ven, 8h–16h</div>
+            </div>
+          </div>
+
+          <div class="contact-card" style="margin-bottom:1rem;text-align:left;padding:1.25rem">
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.75rem">
+              <div class="contact-avatar" style="width:52px;height:52px;font-size:1.3rem;flex-shrink:0">👤</div>
+              <div>
+                <div style="font-weight:700">Sophie Lecomte</div>
+                <div class="role" style="margin-bottom:0">Déléguée — Équipe nuit</div>
+              </div>
+            </div>
+            <div class="contact-info">
+              <div>📞 <a href="tel:+32485987654">0485 98 76 54</a></div>
+              <div>✉️ <a href="mailto:s.lecomte@cgslb-lgg.be">s.lecomte@cgslb-lgg.be</a></div>
+              <div>🕐 Mar–Sam, 22h–6h</div>
+            </div>
+          </div>
+
+          <div class="contact-card" style="margin-bottom:2rem;text-align:left;padding:1.25rem">
+            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.75rem">
+              <div class="contact-avatar" style="width:52px;height:52px;font-size:1.3rem;flex-shrink:0">👤</div>
+              <div>
+                <div style="font-weight:700">Isabelle Maes</div>
+                <div class="role" style="margin-bottom:0">Secrétaire permanente</div>
+              </div>
+            </div>
+            <div class="contact-info">
+              <div>📞 <a href="tel:+3242348000">04 234 80 00</a></div>
+              <div>✉️ <a href="mailto:i.maes@cgslb-lgg.be">i.maes@cgslb-lgg.be</a></div>
+              <div>🕐 Lun–Ven, 9h–17h</div>
+            </div>
+          </div>
+
+          <!-- LOCALISATION -->
+          <div style="background:var(--blue-light);border-radius:var(--radius);padding:1.25rem">
+            <h3 style="font-weight:700;margin-bottom:.75rem;font-size:.95rem">📍 Local syndical</h3>
+            <p style="font-size:.88rem;color:var(--gray-700);line-height:1.8">
+              FedEx Express — Aéroport de Liège<br>
+              Entrée B, Local syndical CGSLB<br>
+              B-4460 Bierset (Liège)<br><br>
+              <strong>Permanences :</strong><br>
+              Lun & Mer : 8h–10h<br>
+              Mar & Jeu : 14h–16h<br>
+              Ven : 9h–11h
+            </p>
+          </div>
+        </div>
+
+        <!-- FORMULAIRE -->
+        <div>
+          <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:1.5rem">Envoyer un message</h2>
+          <div class="success-msg" id="successMsg">
+            ✅ Votre message a bien été envoyé. Un délégué vous contactera dans les plus brefs délais.
+          </div>
+          <form class="contact-form" id="contactForm" novalidate>
+            <div class="form-row" style="margin-bottom:1.25rem">
+              <div class="form-group" style="margin:0">
+                <label for="firstName" style="display:block;font-size:.85rem;font-weight:600;margin-bottom:.4rem">Prénom *</label>
+                <input type="text" id="firstName" placeholder="Votre prénom" required>
+              </div>
+              <div class="form-group" style="margin:0">
+                <label for="lastName" style="display:block;font-size:.85rem;font-weight:600;margin-bottom:.4rem">Nom *</label>
+                <input type="text" id="lastName" placeholder="Votre nom" required>
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:1.25rem">
+              <label for="email" style="display:block;font-size:.85rem;font-weight:600;margin-bottom:.4rem">Adresse e-mail *</label>
+              <input type="email" id="email" placeholder="votre.email@example.com" required>
+            </div>
+            <div class="form-group" style="margin-bottom:1.25rem">
+              <label for="phone" style="display:block;font-size:.85rem;font-weight:600;margin-bottom:.4rem">Téléphone</label>
+              <input type="tel" id="phone" placeholder="04xx xx xx xx">
+            </div>
+            <div class="form-group" style="margin-bottom:1.25rem">
+              <label for="subject" style="display:block;font-size:.85rem;font-weight:600;margin-bottom:.4rem">Sujet *</label>
+              <select id="subject" required>
+                <option value="">-- Choisissez un sujet --</option>
+                <option>Demande d'adhésion CGSLB</option>
+                <option>Litige avec l'employeur</option>
+                <option>Question sur les allocations de chômage</option>
+                <option>Conditions de travail / sécurité</option>
+                <option>Question sur les congés</option>
+                <option>Rendez-vous avec un délégué</option>
+                <option>Autre question</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:1.5rem">
+              <label for="message" style="display:block;font-size:.85rem;font-weight:600;margin-bottom:.4rem">Message *</label>
+              <textarea id="message" placeholder="Décrivez votre situation ou votre question..." required></textarea>
+            </div>
+            <div style="background:var(--gray-100);border-radius:var(--radius);padding:.9rem 1rem;font-size:.8rem;color:var(--gray-700);margin-bottom:1.25rem">
+              🔒 Vos données sont traitées de manière confidentielle conformément au RGPD. Elles ne seront jamais partagées avec des tiers.
+            </div>
+            <button type="submit" class="btn btn-blue btn-full">Envoyer le message →</button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-slot"></div>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      this.style.display = 'none';
+      document.getElementById('successMsg').classList.add('show');
+    });
+  </script>
+</body>
+</html>
