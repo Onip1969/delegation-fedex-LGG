@@ -57,62 +57,117 @@
         <div>
           <h2 style="font-size:1.3rem;font-weight:800;margin-bottom:1.5rem">Vos délégués syndicaux</h2>
 
-          <div class="contact-card" style="margin-bottom:1rem;text-align:left;padding:1.25rem">
+          <!-- Chef de délégation -->
+          <div class="contact-card" style="margin-bottom:1.25rem;text-align:left;padding:1.25rem;border:2px solid var(--yellow);background:var(--blue-light)">
             <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.75rem">
               <div class="contact-avatar" style="width:52px;height:52px;font-size:1.3rem;flex-shrink:0">👤</div>
               <div>
-                <div style="font-weight:700">Jean-Marc Dubois</div>
-                <div class="role" style="margin-bottom:0">Délégué principal</div>
+                <div style="font-weight:800;font-size:1.05rem">Jacky</div>
+                <div class="role" style="margin-bottom:0">Chef de délégation</div>
               </div>
+              <span class="badge badge-yellow" style="margin-left:auto">Chef de délégation</span>
             </div>
             <div class="contact-info">
-              <div>📞 <a href="tel:+32474123456">0474 12 34 56</a></div>
-              <div>✉️ <a href="mailto:jm.dubois@cgslb-lgg.be">jm.dubois@cgslb-lgg.be</a></div>
-              <div>🕐 Lun–Ven, 8h–16h</div>
+              <div>📞 <a href="tel:+32496818185">0496 818.185</a></div>
+              <div>✉️ <a href="mailto:lgg.cgslb@gmail.com">lgg.cgslb@gmail.com</a></div>
             </div>
           </div>
 
-          <div class="contact-card" style="margin-bottom:1rem;text-align:left;padding:1.25rem">
-            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.75rem">
-              <div class="contact-avatar" style="width:52px;height:52px;font-size:1.3rem;flex-shrink:0">👤</div>
-              <div>
-                <div style="font-weight:700">Sophie Lecomte</div>
-                <div class="role" style="margin-bottom:0">Déléguée — Équipe nuit</div>
-              </div>
-            </div>
-            <div class="contact-info">
-              <div>📞 <a href="tel:+32485987654">0485 98 76 54</a></div>
-              <div>✉️ <a href="mailto:s.lecomte@cgslb-lgg.be">s.lecomte@cgslb-lgg.be</a></div>
-              <div>🕐 Mar–Sam, 22h–6h</div>
-            </div>
-          </div>
+          <!-- Tableau des mandats -->
+          <div style="background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);overflow:hidden;margin-bottom:1.25rem;box-shadow:var(--shadow-sm)">
 
-          <div class="contact-card" style="margin-bottom:2rem;text-align:left;padding:1.25rem">
-            <div style="display:flex;align-items:center;gap:1rem;margin-bottom:.75rem">
-              <div class="contact-avatar" style="width:52px;height:52px;font-size:1.3rem;flex-shrink:0">👤</div>
-              <div>
-                <div style="font-weight:700">Isabelle Maes</div>
-                <div class="role" style="margin-bottom:0">Secrétaire permanente</div>
+            <!-- DS -->
+            <div style="background:var(--blue-cgslb);color:white;padding:.6rem 1rem;font-weight:700;font-size:.85rem;display:flex;align-items:center;gap:.5rem">
+              <span>✍️</span> Délégués Syndicaux (DS)
+            </div>
+            <div style="padding:.75rem 1rem;border-bottom:1px solid var(--gray-100)">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);margin-bottom:.5rem">Effectifs</div>
+              <div style="display:flex;flex-direction:column;gap:.4rem">
+                <a href="tel:+32496818185" style="display:flex;justify-content:space-between;align-items:center;background:var(--blue-light);padding:.4rem .85rem;border-radius:var(--radius);font-weight:600;color:var(--blue-dark);text-decoration:none;font-size:.88rem">
+                  <span>Jacky</span><span style="font-size:.8rem;opacity:.8">📞 0496 818.185</span>
+                </a>
+                <a href="tel:+32494768777" style="display:flex;justify-content:space-between;align-items:center;background:var(--blue-light);padding:.4rem .85rem;border-radius:var(--radius);font-weight:600;color:var(--blue-dark);text-decoration:none;font-size:.88rem">
+                  <span>Fabrice</span><span style="font-size:.8rem;opacity:.8">📞 0494 768.777</span>
+                </a>
               </div>
             </div>
-            <div class="contact-info">
-              <div>📞 <a href="tel:+3242348000">04 234 80 00</a></div>
-              <div>✉️ <a href="mailto:i.maes@cgslb-lgg.be">i.maes@cgslb-lgg.be</a></div>
-              <div>🕐 Lun–Ven, 9h–17h</div>
+            <div style="padding:.75rem 1rem;border-bottom:1px solid var(--gray-200)">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);margin-bottom:.5rem">Suppléants</div>
+              <div style="display:flex;flex-direction:column;gap:.4rem">
+                <a href="tel:+32471040098" style="display:flex;justify-content:space-between;align-items:center;background:var(--gray-100);padding:.4rem .85rem;border-radius:var(--radius);font-weight:600;color:var(--gray-700);text-decoration:none;font-size:.88rem">
+                  <span>Hamdi</span><span style="font-size:.8rem;opacity:.8">📞 0471 040.098</span>
+                </a>
+                <a href="tel:+32494788304" style="display:flex;justify-content:space-between;align-items:center;background:var(--gray-100);padding:.4rem .85rem;border-radius:var(--radius);font-weight:600;color:var(--gray-700);text-decoration:none;font-size:.88rem">
+                  <span>Lahcen</span><span style="font-size:.8rem;opacity:.8">📞 0494 788.304</span>
+                </a>
+              </div>
             </div>
+
+            <!-- CE -->
+            <div style="background:var(--blue-cgslb);color:white;padding:.6rem 1rem;font-weight:700;font-size:.85rem;display:flex;align-items:center;gap:.5rem">
+              <span>🏛️</span> Conseil d'Entreprise (CE)
+            </div>
+            <div style="padding:.75rem 1rem;border-bottom:1px solid var(--gray-100)">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);margin-bottom:.5rem">Effectifs</div>
+              <div style="display:flex;flex-direction:column;gap:.4rem">
+                <a href="tel:+32496818185" style="display:flex;justify-content:space-between;align-items:center;background:var(--blue-light);padding:.4rem .85rem;border-radius:var(--radius);font-weight:600;color:var(--blue-dark);text-decoration:none;font-size:.88rem">
+                  <span>Jacky</span><span style="font-size:.8rem;opacity:.8">📞 0496 818.185</span>
+                </a>
+                <a href="tel:+32495430129" style="display:flex;justify-content:space-between;align-items:center;background:var(--blue-light);padding:.4rem .85rem;border-radius:var(--radius);font-weight:600;color:var(--blue-dark);text-decoration:none;font-size:.88rem">
+                  <span>Massimo</span><span style="font-size:.8rem;opacity:.8">📞 0495 430.129</span>
+                </a>
+              </div>
+            </div>
+            <div style="padding:.75rem 1rem;border-bottom:1px solid var(--gray-200)">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);margin-bottom:.5rem">Suppléants</div>
+              <div style="display:flex;flex-direction:column;gap:.4rem">
+                <a href="tel:+32496218086" style="display:flex;justify-content:space-between;align-items:center;background:var(--gray-100);padding:.4rem .85rem;border-radius:var(--radius);font-weight:600;color:var(--gray-700);text-decoration:none;font-size:.88rem">
+                  <span>Pino</span><span style="font-size:.8rem;opacity:.8">📞 0496 218.086</span>
+                </a>
+                <a href="tel:+32494768777" style="display:flex;justify-content:space-between;align-items:center;background:var(--gray-100);padding:.4rem .85rem;border-radius:var(--radius);font-weight:600;color:var(--gray-700);text-decoration:none;font-size:.88rem">
+                  <span>Fabrice</span><span style="font-size:.8rem;opacity:.8">📞 0494 768.777</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- CPPT -->
+            <div style="background:var(--blue-cgslb);color:white;padding:.6rem 1rem;font-weight:700;font-size:.85rem;display:flex;align-items:center;gap:.5rem">
+              <span>🛡️</span> CPPT — Prévention &amp; Protection
+            </div>
+            <div style="padding:.75rem 1rem;border-bottom:1px solid var(--gray-100)">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);margin-bottom:.5rem">Effectifs</div>
+              <div style="display:flex;flex-direction:column;gap:.4rem">
+                <a href="tel:+32496218086" style="display:flex;justify-content:space-between;align-items:center;background:var(--blue-light);padding:.4rem .85rem;border-radius:var(--radius);font-weight:600;color:var(--blue-dark);text-decoration:none;font-size:.88rem">
+                  <span>Pino</span><span style="font-size:.8rem;opacity:.8">📞 0496 218.086</span>
+                </a>
+                <a href="tel:+32498169168" style="display:flex;justify-content:space-between;align-items:center;background:var(--blue-light);padding:.4rem .85rem;border-radius:var(--radius);font-weight:600;color:var(--blue-dark);text-decoration:none;font-size:.88rem">
+                  <span>Christelle</span><span style="font-size:.8rem;opacity:.8">📞 0498 169.168</span>
+                </a>
+              </div>
+            </div>
+            <div style="padding:.75rem 1rem">
+              <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-400);margin-bottom:.5rem">Suppléants</div>
+              <div style="display:flex;flex-direction:column;gap:.4rem">
+                <a href="tel:+32496812745" style="display:flex;justify-content:space-between;align-items:center;background:var(--gray-100);padding:.4rem .85rem;border-radius:var(--radius);font-weight:600;color:var(--gray-700);text-decoration:none;font-size:.88rem">
+                  <span>Didier</span><span style="font-size:.8rem;opacity:.8">📞 0496 812.745</span>
+                </a>
+                <a href="tel:+32491491237" style="display:flex;justify-content:space-between;align-items:center;background:var(--gray-100);padding:.4rem .85rem;border-radius:var(--radius);font-weight:600;color:var(--gray-700);text-decoration:none;font-size:.88rem">
+                  <span>André</span><span style="font-size:.8rem;opacity:.8">📞 0491 491.237</span>
+                </a>
+              </div>
+            </div>
+
           </div>
 
           <!-- LOCALISATION -->
           <div style="background:var(--blue-light);border-radius:var(--radius);padding:1.25rem">
-            <h3 style="font-weight:700;margin-bottom:.75rem;font-size:.95rem">📍 Local syndical</h3>
-            <p style="font-size:.88rem;color:var(--gray-700);line-height:1.8">
-              FedEx Express — Aéroport de Liège<br>
-              Entrée B, Local syndical CGSLB<br>
-              B-4460 Bierset (Liège)<br><br>
-              <strong>Permanences :</strong><br>
-              Lun & Mer : 8h–10h<br>
-              Mar & Jeu : 14h–16h<br>
-              Ven : 9h–11h
+            <h3 style="font-weight:700;margin-bottom:.75rem;font-size:.95rem">📍 Nous trouver</h3>
+            <p style="font-size:.88rem;color:var(--gray-700);line-height:1.9">
+              FedEx Express<br>
+              Aéroport de Liège 90 (LGG)<br>
+              Grâce-Hollogne<br><br>
+              📞 <a href="tel:+3242395976" style="font-weight:600">04 239.59.76</a><br>
+              ✉️ <a href="mailto:lgg.cgslb@gmail.com" style="font-weight:600">lgg.cgslb@gmail.com</a>
             </p>
           </div>
         </div>
