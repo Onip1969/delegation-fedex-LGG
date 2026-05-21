@@ -2,80 +2,41 @@
    CGSLB FedEx LGG — Scripts principaux
    ===================================================== */
 
-// ── Navigation mobile ─────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
+const SESSION_KEY = 'cgslb_auth';
+const PASSWORD    = 'FedExLGG2025';
 
-  // Hamburger menu
-  const hamburger = document.querySelector('.hamburger');
-  const mainNav   = document.querySelector('.main-nav');
-  if (hamburger && mainNav) {
-    hamburger.addEventListener('click', () => {
-      mainNav.classList.toggle('open');
-      hamburger.setAttribute('aria-expanded', mainNav.classList.contains('open'));
-    });
-    document.addEventListener('click', e => {
-      if (!hamburger.contains(e.target) && !mainNav.contains(e.target)) {
-        mainNav.classList.remove('open');
-      }
-    });
-  }
+function isAuthenticated() {
+  return sessionStorage.getItem(SESSION_KEY) === '1';
+}
 
-  // Lien actif selon la page courante
-  document.querySelectorAll('.main-nav a').forEach(link => {
-    if (link.href === location.href) link.classList.add('active');
-  });
+function showModal() {
+  const modal = document.getElementById('loginModal');
+  if (modal) modal.style.display = 'flex';
+}
 
-  // ── Authentification Espace Membres ──────────────────
-  const SESSION_KEY = 'cgslb_auth';
-  const PASSWORD    = 'FedExLGG2025';
+function hideModal() {
+  const modal = document.getElementById('loginModal');
+  if (modal) modal.style.display = 'none';
+}
 
-  function isAuthenticated() {
-    return sessionStorage.getItem(SESSION_KEY) === '1';
-  }
+function showMembers() {
+  const locked  = document.getElementById('lockedArea');
+  const members = document.getElementById('membersArea');
+  if (locked)  locked.style.display  = 'none';
+  if (members) members.style.display = 'block';
+}
 
-  function login(password) {
-    if (password === PASSWORD) {
-      sessionStorage.setItem(SESSION_KEY, '1');
-      return true;
-    }
-    return false;
-  }
+function showLocked() {
+  const locked  = document.getElementById('lockedArea');
+  const members = document.getElementById('membersArea');
+  if (locked)  locked.style.display  = 'block';
+  if (members) members.style.display = 'none';
+}
 
-  function logout() {
-    sessionStorage.removeItem(SESSION_KEY);
-    location.reload();
-  }
-
-  // ── Modal de connexion ────────────────────────────────
-  const overlay   = document.getElementById('loginModal');
-  const loginForm = document.getElementById('loginForm');
-  const loginError = document.getElementById('loginError');
-  const openBtns  = document.querySelectorAll('#openLogin');
-  const closeBtns = document.querySelectorAll('.modal-close');
-  const lockedArea  = document.getElementById('lockedArea');
-  const membersArea = document.getElementById('membersArea');
-  const logoutBtn   = document.getElementById('logoutBtn');
-
-  function showModal() {
-    if (overlay) overlay.classList.add('active');
-  }
-
-  function hideModal() {
-    if (overlay) overlay.classList.remove('active');
-  }
-
-  function showMembers() {
-    if (lockedArea)  lockedArea.style.display  = 'none';
-    if (membersArea) membersArea.style.display  = 'block';
-  }
-
-  function showLocked() {
-    if (lockedArea)  lockedArea.style.display  = 'block';
-    if (membersArea) membersArea.style.display  = 'none';
-  }
+window.addEventListener('load', function() {
 
   // État initial
-  if (lockedArea && membersArea) {
+  if (document.getElementById('lockedArea')) {
     if (isAuthenticated()) {
       showMembers();
     } else {
@@ -83,39 +44,54 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Ouvrir modal
-  document.addEventListener('click', e => {
-    if (e.target && (e.target.id === 'openLogin' || e.target.closest('#openLogin'))) {
+  // Bouton "Se connecter" dans la page
+  const openBtn = document.getElementById('openLogin');
+  if (openBtn) {
+    openBtn.addEventListener('click', function(e) {
       e.preventDefault();
       showModal();
-    }
-  });
-
-  // Fermer modal
-  closeBtns.forEach(btn => btn.addEventListener('click', hideModal));
-  if (overlay) {
-    overlay.addEventListener('click', e => {
-      if (e.target === overlay) hideModal();
     });
   }
 
-  // Soumettre le formulaire
+  // Fermer le modal
+  const closeBtn = document.querySelector('.modal-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', hideModal);
+  }
+
+  // Soumettre mot de passe
+  const loginForm = document.getElementById('loginForm');
   if (loginForm) {
-    loginForm.addEventListener('submit', e => {
+    loginForm.addEventListener('submit', function(e) {
       e.preventDefault();
       const pwd = document.getElementById('passwordInput').value;
-      if (login(pwd)) {
+      if (pwd === PASSWORD) {
+        sessionStorage.setItem(SESSION_KEY, '1');
         hideModal();
         showMembers();
       } else {
-        if (loginError) loginError.style.display = 'block';
+        const err = document.getElementById('loginError');
+        if (err) err.style.display = 'block';
       }
     });
   }
 
   // Déconnexion
+  const logoutBtn = document.getElementById('logoutBtn');
   if (logoutBtn) {
-    logoutBtn.addEventListener('click', logout);
+    logoutBtn.addEventListener('click', function() {
+      sessionStorage.removeItem(SESSION_KEY);
+      location.reload();
+    });
+  }
+
+  // Navigation mobile
+  const hamburger = document.querySelector('.hamburger');
+  const mainNav   = document.querySelector('.main-nav');
+  if (hamburger && mainNav) {
+    hamburger.addEventListener('click', function() {
+      mainNav.classList.toggle('open');
+    });
   }
 
 });
