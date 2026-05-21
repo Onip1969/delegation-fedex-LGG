@@ -7,7 +7,7 @@ const TOPBAR_HTML = `
   <div class="container">
     <span>📍 FedEx Express — Aéroport de Liège (LGG) | Bierset</span>
     <div class="topbar-links">
-      <a href="tel:+3242395976">📞 04 239 59 76</a>
+      <a href="tel:+3242395976">📞 +32 4 239 59 76</a>
       <a href="mailto:lgg.cgslb@gmail.com">✉️ lgg.cgslb@gmail.com</a>
     </div>
   </div>
@@ -35,7 +35,7 @@ const HEADER_HTML = `
       <a href="services.html">Services</a>
       <a href="documents.html">Documents</a>
       <a href="contact.html">Contact</a>
-      <a href="espace-membres.html" class="nav-members" id="openLogin">🔒 Espace Membres</a>
+      <a href="espace-membres.html" class="nav-members">🔒 Espace Membres</a>
     </nav>
   </div>
 </header>`;
@@ -62,14 +62,14 @@ const FOOTER_HTML = `
         <ul>
           <li><a href="espace-membres.html">Espace membres</a></li>
           <li><a href="contact.html">Contacter un délégué</a></li>
-          <li><a href="cgslb.be">Site national CGSLB</a></li>
+          <li><a href="https://cgslb.be">Site national CGSLB</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="mailto:cgslb.lgg@skynet.be">cgslb.lgg@skynet.be</a></li>
-          <li><a href="tel:+3242348000">04 234 80 00</a></li>
+          <li><a href="mailto:lgg.cgslb@gmail.com">lgg.cgslb@gmail.com</a></li>
+          <li><a href="tel:+3242395976">+32 4 239 59 76</a></li>
           <li>Aéroport de Liège<br>B-4460 Bierset</li>
         </ul>
       </div>
@@ -111,13 +111,25 @@ const LOGIN_MODAL_HTML = `
 </div>`;
 
 document.addEventListener('DOMContentLoaded', () => {
-  const topbarSlot  = document.getElementById('topbar-slot');
-  const headerSlot  = document.getElementById('header-slot');
-  const footerSlot  = document.getElementById('footer-slot');
-  const modalSlot   = document.getElementById('modal-slot');
+  const topbarSlot = document.getElementById('topbar-slot');
+  const headerSlot = document.getElementById('header-slot');
+  const footerSlot = document.getElementById('footer-slot');
+  const modalSlot  = document.getElementById('modal-slot');
 
-  if (topbarSlot) topbarSlot.innerHTML  = TOPBAR_HTML;
-  if (headerSlot) headerSlot.innerHTML  = HEADER_HTML;
-  if (footerSlot) footerSlot.innerHTML  = FOOTER_HTML;
-  if (modalSlot)  modalSlot.innerHTML   = LOGIN_MODAL_HTML;
-});
+  if (topbarSlot) topbarSlot.innerHTML = TOPBAR_HTML;
+  if (headerSlot) headerSlot.innerHTML = HEADER_HTML;
+  if (footerSlot) footerSlot.innerHTML = FOOTER_HTML;
+  if (modalSlot)  modalSlot.innerHTML  = LOGIN_MODAL_HTML;
+
+  // Ouvrir le modal depuis le bouton de la page espace-membres
+  document.addEventListener('click', (e) => {
+    if (e.target && e.target.id === 'openLogin') {
+      e.preventDefault();
+      const modal = document.getElementById('loginModal');
+      if (modal) modal.classList.add('active');
+    }
+    if (e.target && e.target.classList.contains('modal-close')) {
+      const modal = document.getElementById('loginModal');
+      if (modal) modal.classList.remove('active');
+    }
+  });
