@@ -7,8 +7,8 @@ const TOPBAR_HTML = `
   <div class="container">
     <span>📍 FedEx Express — Aéroport de Liège (LGG) | Bierset</span>
     <div class="topbar-links">
-      <a href="tel:+3242348000">📞 04 234 80 00</a>
-      <a href="mailto:cgslb.lgg@skynet.be">✉️ cgslb.lgg@skynet.be</a>
+      <a href="tel:+3242395976">📞 04 234 80 00</a>
+      <a href="mailto:lgg.cgslb@gmail.com">✉️ lgg.cgslb@gmail.com</a>
     </div>
   </div>
 </div>`;
