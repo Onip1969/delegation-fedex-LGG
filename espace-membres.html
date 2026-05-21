@@ -5,310 +5,90 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Espace Membres — CGSLB FedEx LGG</title>
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    /* Barre de déconnexion */
-    .logout-bar { display: none; }
-    .members-area.active ~ * .logout-bar,
-    .logout-bar.visible { display: block; }
-
-    /* Calendrier */
-    .calendar-list li {
-      display: flex; gap: 1rem; align-items: flex-start;
-      padding: .75rem 0; border-bottom: 1px solid var(--gray-200);
-      font-size: .9rem;
-    }
-    .calendar-list li:last-child { border-bottom: none; }
-    .cal-date {
-      background: var(--blue-cgslb); color: white;
-      border-radius: var(--radius); padding: .4rem .6rem;
-      text-align: center; min-width: 52px; flex-shrink: 0;
-      font-weight: 700; font-size: .8rem; line-height: 1.3;
-    }
-
-    /* Tableau de vote */
-    .vote-bar { background: var(--gray-200); border-radius: 999px; height: 8px; overflow: hidden; margin-top: .4rem; }
-    .vote-fill { height: 100%; border-radius: 999px; background: var(--blue-cgslb); }
-  </style>
 </head>
 <body>
-
   <div id="topbar-slot"></div>
   <div id="header-slot"></div>
-  <div id="modal-slot"></div>
 
-  <!-- ══════════════════════════════════════════════
-       ZONE VERROUILLÉE (affichée si non connecté)
-  ══════════════════════════════════════════════════ -->
+  <!-- MODAL MOT DE PASSE -->
+  <div id="loginModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);z-index:9999;justify-content:center;align-items:center;">
+    <div style="background:white;border-radius:12px;padding:2rem;max-width:400px;width:90%;position:relative;">
+      <button onclick="document.getElementById('loginModal').style.display='none'" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;">✕</button>
+      <div style="text-align:center;margin-bottom:1.5rem;">
+        <span style="background:#003F7F;color:white;padding:.4rem .8rem;border-radius:6px;font-weight:bold;">CGSLB</span>
+      </div>
+      <h2 style="text-align:center;margin-bottom:.5rem;">Espace Membres</h2>
+      <p style="text-align:center;color:#666;margin-bottom:1.5rem;">Entrez votre mot de passe</p>
+      <div id="loginError" style="display:none;background:#FEE2E2;color:#DC2626;padding:.75rem;border-radius:6px;margin-bottom:1rem;">❌ Mot de passe incorrect.</div>
+      <input type="password" id="passwordInput" placeholder="Mot de passe" style="width:100%;padding:.75rem;border:1px solid #ddd;border-radius:6px;font-size:1rem;margin-bottom:1rem;box-sizing:border-box;">
+      <button onclick="doLogin()" style="width:100%;background:#003F7F;color:white;border:none;padding:.85rem;border-radius:6px;font-size:1rem;cursor:pointer;">Se connecter →</button>
+      <p style="text-align:center;font-size:.8rem;color:#999;margin-top:1rem;">Mot de passe oublié ? Contactez un délégué.</p>
+    </div>
+  </div>
+
+  <!-- ZONE VERROUILLÉE -->
   <div id="lockedArea">
     <div class="page-hero">
       <div class="container">
-        <nav class="breadcrumb">
-          <a href="index.html">Accueil</a>
-          <span>›</span>
-          <span>Espace Membres</span>
-        </nav>
         <h1>🔒 Espace Membres</h1>
         <p>Zone réservée aux membres CGSLB — FedEx LGG</p>
       </div>
     </div>
     <section class="section">
-      <div class="container">
-        <div class="locked-area">
-          <div class="lock-icon">🔐</div>
-          <h2>Accès réservé aux membres</h2>
-          <p>Cet espace contient des documents confidentiels, les procès-verbaux des réunions,<br>
-             les formulaires internes et les informations exclusives aux membres CGSLB FedEx LGG.</p>
-          <button class="btn btn-blue" id="openLogin" style="font-size:1rem;padding:.85rem 2rem">
-            🔑 Se connecter à l'espace membres
-          </button>
-          <p style="margin-top:1.5rem;font-size:.85rem;color:var(--gray-400)">
-            Pas encore membre ? <a href="contact.html">Contactez un délégué</a> pour rejoindre la CGSLB.
-          </p>
-        </div>
+      <div class="container" style="text-align:center;padding:4rem 1rem;">
+        <div style="font-size:4rem;margin-bottom:1.5rem;">🔐</div>
+        <h2>Accès réservé aux membres</h2>
+        <p style="color:#666;max-width:500px;margin:1rem auto 2rem;">Cet espace contient des documents confidentiels, les procès-verbaux des réunions et les informations exclusives aux membres CGSLB FedEx LGG.</p>
+        <button onclick="document.getElementById('loginModal').style.display='flex'" style="background:#003F7F;color:white;border:none;padding:1rem 2.5rem;border-radius:8px;font-size:1rem;cursor:pointer;">🔑 Se connecter à l'espace membres</button>
+        <p style="margin-top:1.5rem;font-size:.85rem;color:#999;">Pas encore membre ? <a href="contact.html">Contactez un délégué</a></p>
       </div>
     </section>
   </div>
 
-  <!-- ══════════════════════════════════════════════
-       ZONE MEMBRES (affichée après connexion)
-  ══════════════════════════════════════════════════ -->
-  <div id="membersArea" class="members-area">
-
-    <!-- Barre de bienvenue + déconnexion -->
-    <div class="logout-bar visible">
-      <div class="container">
-        <p>✅ Connecté en tant que <strong>Membre CGSLB FedEx LGG</strong></p>
-        <button class="btn btn-sm" id="logoutBtn"
-                style="background:white;color:var(--blue-dark);border:1px solid var(--blue-cgslb)">
-          Se déconnecter
-        </button>
+  <!-- ZONE MEMBRES -->
+  <div id="membersArea" style="display:none;">
+    <div style="background:#003F7F;color:white;padding:.75rem 0;">
+      <div class="container" style="display:flex;justify-content:space-between;align-items:center;">
+        <p style="margin:0;">✅ Connecté — Membre CGSLB FedEx LGG</p>
+        <button onclick="doLogout()" style="background:white;color:#003F7F;border:1px solid #003F7F;padding:.4rem 1rem;border-radius:6px;cursor:pointer;">Se déconnecter</button>
       </div>
     </div>
-
-    <!-- En-tête zone membres -->
     <div class="page-hero">
       <div class="container">
-        <nav class="breadcrumb">
-          <a href="index.html">Accueil</a>
-          <span>›</span>
-          <span>Espace Membres</span>
-        </nav>
         <h1>👥 Espace Membres</h1>
         <p>Bienvenue — Zone réservée aux membres CGSLB FedEx LGG</p>
       </div>
     </div>
-
-    <!-- ── ALERTE INTERNE ────────────────────────── -->
-    <div style="background:#FFFBEB;border-bottom:2px solid var(--yellow);padding:.75rem 0">
-      <div class="container">
-        <div class="alert alert-warning" style="margin:0">
-          <span class="alert-icon">📢</span>
-          <div>
-            <strong>Information interne — Assemblée générale du 28 mai 2026</strong>
-            <p>Ordre du jour : approbation CCT 2026, rapport financier, questions diverses. Présence souhaitée de tous les membres.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <section class="section">
       <div class="container">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem;">
 
-        <!-- ── GRILLE PRINCIPALE ────────────────── -->
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-bottom:2.5rem">
-
-          <!-- PV & Réunions -->
           <div class="member-card">
             <div class="member-card-icon">📋</div>
             <h3>Procès-verbaux</h3>
             <p>Comptes-rendus officiels des réunions CE, CPPT et délégations.</p>
             <ul class="doc-list">
-              <li><span class="doc-icon">📄</span> PV CE — 18 mars 2026 <span class="badge badge-green" style="margin-left:auto">Nouveau</span></li>
+              <li><span class="doc-icon">📄</span> PV CE — 18 mars 2026</li>
               <li><span class="doc-icon">📄</span> PV CPPT — 5 mars 2026</li>
               <li><span class="doc-icon">📄</span> PV CE — 18 fév. 2026</li>
-              <li><span class="doc-icon">📄</span> PV CE — 21 jan. 2026</li>
-              <li><span class="doc-icon">📁</span> Archives 2025 →</li>
             </ul>
           </div>
 
-          <!-- CCT & Accords internes -->
           <div class="member-card">
             <div class="member-card-icon">✍️</div>
-            <h3>Accords & CCT internes</h3>
-            <p>Textes des accords conclus avec la direction, annexes confidentielles.</p>
+            <h3>Accords & CCT</h3>
+            <p>Textes des accords conclus avec la direction.</p>
             <ul class="doc-list">
-              <li><span class="doc-icon">📄</span> CCT salariale 2026 — Brouillon <span class="badge badge-yellow" style="margin-left:auto">Projet</span></li>
+              <li><span class="doc-icon">📄</span> CCT salariale 2026</li>
               <li><span class="doc-icon">📄</span> Accord horaires nuit 2025</li>
-              <li><span class="doc-icon">📄</span> Protocole sécurité entrepôt</li>
-              <li><span class="doc-icon">📄</span> Plan de formation 2026</li>
-              <li><span class="doc-icon">📁</span> Tous les accords →</li>
+              <li><span class="doc-icon">📄</span> Protocole sécurité</li>
             </ul>
           </div>
 
-          <!-- Formulaires membres -->
-          <div class="member-card">
-            <div class="member-card-icon">📝</div>
-            <h3>Formulaires membres</h3>
-            <p>Demandes et formulaires à remplir pour vos démarches syndicales.</p>
-            <ul class="doc-list">
-              <li><span class="doc-icon">📝</span> Demande d'assistance juridique</li>
-              <li><span class="doc-icon">📝</span> Déclaration accident du travail</li>
-              <li><span class="doc-icon">📝</span> Demande crédit-temps</li>
-              <li><span class="doc-icon">📝</span> Signalement harcèlement</li>
-              <li><span class="doc-icon">📝</span> Cotisation annuelle</li>
-            </ul>
-          </div>
-
-        </div>
-
-        <!-- ── DEUXIÈME RANGÉE ──────────────────── -->
-        <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:1.5rem;margin-bottom:2.5rem">
-
-          <!-- Calendrier -->
           <div class="member-card">
             <div class="member-card-icon">📅</div>
-            <h3>Calendrier syndical 2026</h3>
-            <p>Réunions, permanences et événements à venir.</p>
-            <ul class="calendar-list" style="margin-top:.75rem">
-              <li>
-                <div class="cal-date">28<br>MAI</div>
-                <div>
-                  <strong>Assemblée générale membres</strong><br>
-                  <span style="color:var(--gray-400);font-size:.82rem">14h00 — Salle B12 — FedEx LGG</span>
-                </div>
-              </li>
-              <li>
-                <div class="cal-date">10<br>JUN</div>
-                <div>
-                  <strong>Réunion Conseil d'Entreprise</strong><br>
-                  <span style="color:var(--gray-400);font-size:.82rem">10h00 — Salle de conférence C</span>
-                </div>
-              </li>
-              <li>
-                <div class="cal-date">18<br>JUN</div>
-                <div>
-                  <strong>CPPT — Sécurité entrepôt</strong><br>
-                  <span style="color:var(--gray-400);font-size:.82rem">09h30 — Local syndical</span>
-                </div>
-              </li>
-              <li>
-                <div class="cal-date">2<br>JUL</div>
-                <div>
-                  <strong>Formation syndicale — Droits du travailleur</strong><br>
-                  <span style="color:var(--gray-400);font-size:.82rem">9h–17h — Centre de formation CGSLB Liège</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <!-- Sondage interne -->
-          <div class="member-card">
-            <div class="member-card-icon">🗳️</div>
-            <h3>Sondage membres</h3>
-            <p style="margin-bottom:1.25rem">Êtes-vous satisfait des résultats des négociations CCT 2026 ?</p>
-            <div style="margin-bottom:1rem">
-              <div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:.3rem">
-                <span>👍 Oui, très satisfait</span><strong>62%</strong>
-              </div>
-              <div class="vote-bar"><div class="vote-fill" style="width:62%"></div></div>
-            </div>
-            <div style="margin-bottom:1rem">
-              <div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:.3rem">
-                <span>👌 Partiellement satisfait</span><strong>28%</strong>
-              </div>
-              <div class="vote-bar"><div class="vote-fill" style="width:28%;background:var(--yellow)"></div></div>
-            </div>
-            <div style="margin-bottom:1.5rem">
-              <div style="display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:.3rem">
-                <span>👎 Non satisfait</span><strong>10%</strong>
-              </div>
-              <div class="vote-bar"><div class="vote-fill" style="width:10%;background:#EF4444"></div></div>
-            </div>
-            <p style="font-size:.78rem;color:var(--gray-400);margin-bottom:1rem">142 membres ont voté</p>
-            <div style="display:flex;flex-direction:column;gap:.5rem">
-              <button class="btn btn-blue btn-sm btn-full" onclick="alert('Vote enregistré — merci !')">👍 Voter</button>
-              <a href="#" style="font-size:.82rem;text-align:center">Voir le prochain sondage</a>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- ── ESPACE DE MESSAGERIE INTERNE ──────── -->
-        <div class="member-card" style="margin-bottom:2.5rem">
-          <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1rem">
-            <div class="member-card-icon" style="margin-bottom:0">💬</div>
-            <h3 style="margin-bottom:0">Messages des délégués</h3>
-            <span class="badge badge-blue" style="margin-left:auto">3 nouveaux</span>
-          </div>
-          <div style="display:grid;gap:.75rem">
-
-            <div style="background:var(--blue-light);border-radius:var(--radius);padding:1rem;border-left:4px solid var(--blue-cgslb)">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
-                <strong style="font-size:.9rem">Jean-Marc Dubois — Délégué principal</strong>
-                <span style="font-size:.75rem;color:var(--gray-400)">Aujourd'hui, 09:14</span>
-              </div>
-              <p style="font-size:.88rem;color:var(--gray-700)">
-                Le projet d'accord CCT 2026 est disponible en téléchargement ci-dessus. Veuillez le lire attentivement avant l'AG du 28 mai. Vos questions sont les bienvenues.
-              </p>
-            </div>
-
-            <div style="background:var(--gray-100);border-radius:var(--radius);padding:1rem;border-left:4px solid var(--gray-400)">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
-                <strong style="font-size:.9rem">Sophie Lecomte — Équipe nuit</strong>
-                <span style="font-size:.75rem;color:var(--gray-400)">17 mai, 22:45</span>
-              </div>
-              <p style="font-size:.88rem;color:var(--gray-700)">
-                Suite à la réunion sur les nouveaux horaires de nuit, j'ai demandé une suspension de la mesure jusqu'à consultation complète du CPPT. Résultat attendu fin mai.
-              </p>
-            </div>
-
-            <div style="background:var(--gray-100);border-radius:var(--radius);padding:1rem;border-left:4px solid var(--gray-400)">
-              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
-                <strong style="font-size:.9rem">Patrick Renard — Sécurité</strong>
-                <span style="font-size:.75rem;color:var(--gray-400)">10 mai, 08:30</span>
-              </div>
-              <p style="font-size:.88rem;color:var(--gray-700)">
-                Inspection sécurité de l'entrepôt secteur D effectuée. Rapport complet disponible dans les PV CPPT. 3 points d'attention ont été soulevés à la direction.
-              </p>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- ── AVANTAGES EXCLUSIFS ────────────────── -->
-        <div class="section-header" style="text-align:left;margin-bottom:1.5rem">
-          <span class="label">Réservé aux membres</span>
-          <h2>Avantages exclusifs</h2>
-        </div>
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem">
-          <div style="background:var(--blue-light);border-radius:var(--radius);padding:1.25rem;border:1px solid #BFDBFE">
-            <div style="font-size:1.75rem;margin-bottom:.6rem">🎟️</div>
-            <h4 style="font-weight:700;font-size:.9rem;margin-bottom:.35rem">Bons de réduction</h4>
-            <p style="font-size:.82rem;color:var(--gray-700)">Réductions chez nos partenaires : loisirs, voyages, assurances.</p>
-          </div>
-          <div style="background:var(--blue-light);border-radius:var(--radius);padding:1.25rem;border:1px solid #BFDBFE">
-            <div style="font-size:1.75rem;margin-bottom:.6rem">📚</div>
-            <h4 style="font-weight:700;font-size:.9rem;margin-bottom:.35rem">Bibliothèque juridique</h4>
-            <p style="font-size:.82rem;color:var(--gray-700)">Accès complet à notre base documentaire en droit social belge.</p>
-          </div>
-          <div style="background:var(--blue-light);border-radius:var(--radius);padding:1.25rem;border:1px solid #BFDBFE">
-            <div style="font-size:1.75rem;margin-bottom:.6rem">🎓</div>
-            <h4 style="font-weight:700;font-size:.9rem;margin-bottom:.35rem">Formations gratuites</h4>
-            <p style="font-size:.82rem;color:var(--gray-700)">Inscriptions prioritaires aux formations CGSLB 2026.</p>
-          </div>
-          <div style="background:var(--blue-light);border-radius:var(--radius);padding:1.25rem;border:1px solid #BFDBFE">
-            <div style="font-size:1.75rem;margin-bottom:.6rem">☎️</div>
-            <h4 style="font-weight:700;font-size:.9rem;margin-bottom:.35rem">Ligne directe délégués</h4>
-            <p style="font-size:.82rem;color:var(--gray-700)">Numéro prioritaire pour joindre un délégué en dehors des permanences.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-  </div><!-- /membersArea -->
-
-  <div id="footer-slot"></div>
-  <script src="js/components.js"></script>
-  <script src="js/main.js"></script>
-</body>
-</html>
+            <h3>Calendrier 2026</h3>
+            <p>Réunions et permanences à venir.</p>
+            <ul class="doc-list">
+              <li><span class="doc-icon">📅</span> AG membres — 28 mai 2026</li>
+              <li><span class="doc-icon">📅</span> CE — 1
